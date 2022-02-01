@@ -1,0 +1,118 @@
+<html>
+
+    <head>
+        <title> Chat with username </title>
+        <h1>Chatting Application </h1>
+        <script>
+            var name = prompt("Enter your name please");
+        </script>
+
+        <style>
+            h1{
+                text-align: center;
+            }
+            *{
+                margin: 5px;
+                padding: 0px;
+            }
+
+            body{
+                font-size: 20px;
+            }
+
+            #form{
+                padding: 5px;
+                position: fixed;
+                bottom: 5px;
+                width: 100%;
+            }
+
+            #form input
+            {
+                width: 90%;
+                background-color: aquamarine;
+                padding: 10px;
+                border-radius: 30px;
+            }
+
+            #form button
+            {
+                width: 5%;
+                background-color: rgb(76, 233, 76);
+                padding: 10px;
+                color: #fff;
+                border-radius: 10px;
+            }
+
+            #message{
+                list-style-type: none;
+            }
+
+            #messages li
+            {
+                padding: 5px 10px;
+                width: 100%;
+            }
+            
+            #list
+            {
+                text-align: right;
+                background-color: greenyellow;
+                margin-left: 30%;
+                font-size: 25px;
+                line-height: 25px;
+                width: 62pc !important;
+                               
+            }
+            #receiver{
+                text-align: left;
+                background-color:goldenrod;                
+                font-size: 25px;
+                line-height: 25px;
+                width: 62pc !important;
+            }
+            
+            ul{
+                list-style-type: none;
+                
+            }
+
+
+        </style>
+
+
+    </head>
+
+    <body>
+
+       <ul id="messages"></ul>
+
+
+        <form id="form">
+            <input id="input" placeholder="Enter you text">
+            <button>Send</button>
+        </form>
+
+    </body>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script>
+        var socket = io();
+        socket.emit('joining msg', name);
+        $('#form').submit(function (e){
+            e.preventDefault;
+            var message = $('#input').val();
+            socket.emit("chat message", (name + " : " + message));
+            $('#messages').append($('<li id="list">').text('You : ' + message));
+            $('#input').val("");
+            return false; //important
+        })
+        socket.on('chat message', function(msg){
+            $('#messages').append($('<li id="receiver">').text(msg));
+        });
+
+    </script>
+
+</html>

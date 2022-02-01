@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.17.2",
+    "http": "^0.0.1-security",
+    "path": "^0.12.7",
+    "socket.io": "^4.4.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "chat app",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
+}
